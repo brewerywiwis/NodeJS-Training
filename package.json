@@ -5,6 +5,7 @@
   "main": "promise.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js",
     "run_promise": "node promise.js",
     "run_app": "nodemon app.js"
   },
@@ -12,6 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "axios": "^0.21.1",
+    "ejs": "^3.1.5",
     "express": "^4.17.1"
   },
   "devDependencies": {
