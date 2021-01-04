@@ -14,6 +14,7 @@ const rootDir = require("./utils/path");
 
 const express = require("express");
 const app = express();
+const MongoConnect = require("./utils/database").MongoConnect;
 const homeRouter = require("./routes/home");
 const storeRouter = require("./routes/store");
 
@@ -37,4 +38,6 @@ app.use((req, res, next) => {
   res.status(404).render("404");
 });
 
-app.listen(3000);
+MongoConnect(() => {
+  app.listen(3000);
+});

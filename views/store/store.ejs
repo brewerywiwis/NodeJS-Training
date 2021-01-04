@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>brewerywiwis's Store</title> -->
-    <%- include('./includes/head') %>
+    <%- include('../includes/head') %>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -18,7 +18,13 @@
       integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
       crossorigin="anonymous"
     ></script>
-    <%- include('./includes/navigation') %>
-    <h1>Welcome to brewerywiwis's Store</h1>
+    <%- include('../includes/navigation') %>
+    <h1 class="pt-3" align='center'>This is list of product</h1>
+    <div class="row align-items-start bg-dark text-white">
+      <% console.log(productArray); %>
+      <% productArray.forEach(element => { %>
+      <%- include('./card', {element:element}) %>
+      <% }); %>
+    </div>
   </body>
 </html>
