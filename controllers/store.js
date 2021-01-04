@@ -1,9 +1,7 @@
-const getDB = require("../utils/database").getDB;
+const productModel = require("../models/product");
 
-const getAllProduct = async () => {
-  const db = getDB();
-  return db.collection("product").find({}).toArray();
-};
 exports.getStorePage = async (req, res, next) => {
-  res.render("./store/store", { productArray: await getAllProduct() });
+  res.render("./store/store", {
+    productArray: await productModel.getAllProduct(),
+  });
 };
