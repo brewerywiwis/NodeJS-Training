@@ -17,13 +17,17 @@ const app = express();
 const MongoConnect = require("./utils/database").MongoConnect;
 const homeRouter = require("./routes/home");
 const storeRouter = require("./routes/store");
-
+const loginRouter = require("./routes/login");
+const signUpRouter = require("./routes/signup");
+const bodyParser = require("body-parser");
 app.set("view engine", "ejs");
 app.set("views", "./views");
 
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(homeRouter);
 app.use(storeRouter);
-
+app.use(loginRouter);
+app.use(signUpRouter);
 // app.use("/", (req, res, next) => {
 //   console.log("in the middleware");
 //   res.send("hello world");
