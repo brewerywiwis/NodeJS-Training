@@ -4,5 +4,6 @@ exports.getLoginPage = (req, res, next) => {
 
 exports.postLoginPage = (req, res, next) => {
   console.log("Clicked log in btn");
+  res.setHeader("Set-Cookie", "isLoggedIn=true");
   res.redirect("/");
 };

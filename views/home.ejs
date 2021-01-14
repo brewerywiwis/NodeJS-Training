@@ -19,6 +19,10 @@
       crossorigin="anonymous"
     ></script>
     <%- include('./includes/navigation') %>
-    <h1>Welcome to brewerywiwis's Store</h1>
+    <% if (isLoggedIn === false) { %>
+      <h1>Welcome to brewerywiwis's Store</h1>
+    <% }else{ %>
+      <h1>You're logged in</h1>
+    <% } %>
   </body>
 </html>
