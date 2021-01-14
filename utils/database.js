@@ -1,10 +1,13 @@
 const mongo = require("mongodb");
 
-const MongoClient = mongo.MongoClient;
+const MongoClient = mongo.MongoClient(
+  "mongodb+srv://brew:1234@cluster0.uea93.mongodb.net/test",
+  { useUnifiedTopology: true }
+);
 let _db;
 
 const MongoConnect = (callback) => {
-  MongoClient.connect("mongodb+srv://brew:1234@cluster0.uea93.mongodb.net/test")
+  MongoClient.connect()
     .then((client) => {
       console.log("DB connected");
       _db = client.db("store");
