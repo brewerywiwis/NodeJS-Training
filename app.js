@@ -15,6 +15,8 @@ const rootDir = require("./utils/path");
 const express = require("express");
 const app = express();
 const MongoConnect = require("./utils/database").MongoConnect;
+const session = require("express-session");
+const MongoStore = require("connect-mongo")(session);
 const homeRouter = require("./routes/home");
 const storeRouter = require("./routes/store");
 const authRouter = require("./routes/auth");
@@ -29,24 +31,28 @@ app.use(express.static("./public"));
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.use(homeRouter);
-app.use(storeRouter);
-app.use(authRouter);
-app.use(signUpRouter);
-// app.use("/", (req, res, next) => {
-//   console.log("in the middleware");
-//   res.send("hello world");
-// });
+var minute = 60 * 1000;
 
-// app.use("/user", (req, res, next) => {
-//   console.log("in the middleware");
-//   res.send("hello world");
-// });
+MongoConnect((MongoClient) => {
+  app.use(
+    session({
+      secret: "test development",
+      resave: false,
+      saveUninitialized: false,
+      cookie: {
+        maxAge: 10 * minute, //cookie has age = 10 min
+      },
+      store: new MongoStore({ client: MongoClient, dbName: "store" }),
+    })
+  );
+  app.use(homeRouter);
+  app.use(storeRouter);
+  app.use(authRouter);
+  app.use(signUpRouter);
 
-app.use((req, res, next) => {
-  res.status(404).render("404");
-});
+  app.use((req, res, next) => {
+    res.status(404).render("404");
+  });
 
-MongoConnect(() => {
   app.listen(3000);
 });

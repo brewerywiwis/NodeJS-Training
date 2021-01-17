@@ -1,3 +1,4 @@
 exports.getHomePage = (req, res, next) => {
-  res.render("home", { isLoggedIn: req.cookies.isLoggedIn === "true" });
+  console.log(req.session.isLoggedIn);
+  res.render("home", { isLoggedIn: req.session.isLoggedIn === true });
 };
