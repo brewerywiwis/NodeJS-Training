@@ -2,10 +2,10 @@ const getDB = require("../utils/database").getDB;
 
 const getUserByUsername = (username) => {
   const db = getDB();
-  return db.collection("User").find({ Username: username });
+  return db.collection("User").findOne({ Username: username });
 };
 
-const createUser = (username, password) => {
+exports.createUser = (username, password) => {
   return new Promise((succ, fail) => {
     getUserByUsername(username).toArray((err, resultArray) => {
       if (resultArray.length === 0) {
@@ -28,4 +28,4 @@ const createUser = (username, password) => {
   });
 };
 
-exports.createUser = createUser;
+exports.getUserByUsername = getUserByUsername;

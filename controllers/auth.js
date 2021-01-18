@@ -5,12 +5,31 @@ exports.getLoginPage = (req, res, next) => {
   res.render("login");
 };
 
-exports.postLoginPage = (req, res, next) => {
+exports.postLoginPage = async (req, res, next) => {
   // console.log("Clicked log in btn");
   // res.setHeader("Set-Cookie", "isLoggedIn=true");
-
-  req.session.isLoggedIn = true;
-  res.redirect("/");
+  const username = req.body.uname;
+  const password = req.body.psw;
+  userModel.getUserByUsername(username).then((user) => {
+    if (user) {
+      bcrypt
+        .compare(password, user.Password)
+        .then((result) => {
+          if (result === true) {
+            req.session.isLoggedIn = true;
+            return res.redirect("/");
+          } else {
+            req.session.isLoggedIn = false;
+            return res.redirect("/login");
+          }
+        })
+        .catch(() => {
+          return res.redirect("/login");
+        });
+    } else {
+      return res.redirect("/login");
+    }
+  });
 };
 
 exports.getSignUpPage = (req, res, next) => {
