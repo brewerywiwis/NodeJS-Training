@@ -19,7 +19,7 @@
       crossorigin="anonymous"
     ></script>
     <%- include('../includes/navigation') %>
-    <% if (isLoggedIn === false) { %>
+    <% if (isAuthenticated === false) { %>
       <h1>You don't have permission to see this page</h1>
     <% }else{ %>
       <h1 class="pt-3" align='center'>This is list of product</h1>

@@ -2,12 +2,10 @@ const userModel = require("../models/user");
 const bcrypt = require("bcrypt");
 
 exports.getLoginPage = (req, res, next) => {
-  res.render("login", { isLoggedIn: req.session.isLoggedIn === true });
+  res.render("login");
 };
 
 exports.postLoginPage = async (req, res, next) => {
-  // console.log("Clicked log in btn");
-  // res.setHeader("Set-Cookie", "isLoggedIn=true");
   const username = req.body.uname;
   const password = req.body.psw;
   userModel.getUserByUsername(username).then((user) => {
@@ -38,8 +36,6 @@ exports.getSignUpPage = (req, res, next) => {
 };
 
 exports.postSignUpPage = (req, res, next) => {
-  //   console.log("Clicked sign up btn");
-  //   console.log(req.body.uname);
   const username = req.body.uname;
   const password = req.body.psw;
   const saltRounds = 10;

@@ -73,7 +73,7 @@
     <h1 align="center">Welcome to Sign up page</h1>
 
         <form class="modal-content animate" action="/signup" method="post">
-
+          <input type="hidden" name="_csrf" value="<?= csrfToken ?>">
           <div class="container-login">
             <label for="uname"><b>Username</b></label>
             <input type="text" placeholder="Enter Username" name="uname" required>
