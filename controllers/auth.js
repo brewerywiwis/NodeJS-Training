@@ -25,13 +25,15 @@ exports.postSignUpPage = (req, res, next) => {
   const saltRounds = 10;
 
   bcrypt.hash(password, saltRounds, (err, hash) => {
-    userModel
-      .createUser(username, hash)
-      .then(() => {
-        res.redirect("/login");
-      })
-      .catch(() => {
-        console.log("can't create user");
-      });
+    if (username && password) {
+      userModel
+        .createUser(username, hash)
+        .then(() => {
+          res.redirect("/login");
+        })
+        .catch(() => {
+          console.log("can't create user");
+        });
+    }
   });
 };
