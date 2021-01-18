@@ -27,7 +27,7 @@ const cookieParser = require("cookie-parser");
 app.set("view engine", "ejs");
 app.set("views", "./views");
 
-app.use(morgan("tiny"));
+app.use(morgan("dev"));
 app.use(express.static("./public"));
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: false }));

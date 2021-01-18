@@ -19,11 +19,15 @@
       crossorigin="anonymous"
     ></script>
     <%- include('../includes/navigation') %>
-    <h1 class="pt-3" align='center'>This is list of product</h1>
+    <% if (isLoggedIn === false) { %>
+      <h1>You don't have permission to see this page</h1>
+    <% }else{ %>
+      <h1 class="pt-3" align='center'>This is list of product</h1>
     <div class="row align-items-start bg-dark text-white">
       <% productArray.forEach(element => { %>
       <%- include('./card', {element:element}) %>
       <% }); %>
     </div>
+    <% } %>
   </body>
 </html>

@@ -2,7 +2,7 @@ const userModel = require("../models/user");
 const bcrypt = require("bcrypt");
 
 exports.getLoginPage = (req, res, next) => {
-  res.render("login");
+  res.render("login", { isLoggedIn: req.session.isLoggedIn === true });
 };
 
 exports.postLoginPage = async (req, res, next) => {
@@ -17,9 +17,10 @@ exports.postLoginPage = async (req, res, next) => {
         .then((result) => {
           if (result === true) {
             req.session.isLoggedIn = true;
+            req.session.user = user;
             return res.redirect("/");
           } else {
-            req.session.isLoggedIn = false;
+            req.session.destroy();
             return res.redirect("/login");
           }
         })
@@ -55,4 +56,9 @@ exports.postSignUpPage = (req, res, next) => {
         });
     }
   });
+};
+
+exports.getLogOutPage = (req, res, next) => {
+  req.session.destroy();
+  return res.redirect("/");
 };
